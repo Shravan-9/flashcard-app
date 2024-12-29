@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
+</head>
+<body>
+    <h1>Flashcards App</h1>
+    <div class="main-container">
+        <div class="card-container">
+            {% for card in flashcards %}
+                <div class="card" data-id="{{ card.id }}">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <strong>{{ card.question }}</strong>
+                        </div>
+                        <div class="card-back">
+                            <strong>{{ card.answer }}</strong>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="action-panel">
+            <h2>Actions</h2>
+            <button id="create-btn" class="action-button">+ Create</button>
+            <button id="edit-btn" class="action-button edit-btn">Edit</button>
+            <button id="delete-btn" class="delete-btn">Delete</button>
+        </div>
+    </div>
+
+    <!-- Create Flashcard Modal -->
+    <div id="create-form" class="modal hidden">
+        <form id="create-flashcard-form">
+            <label for="question">Question:</label>
+            <textarea id="question" name="question" required></textarea>
+            <label for="answer">Answer:</label>
+            <textarea id="answer" name="answer" required></textarea>
+            <button type="submit">Add Flashcard</button>
+        </form>
+        <button type="button" onclick="hideCreateForm()">Cancel</button>
+    </div>
+
+    <!-- Edit Flashcard Modal -->
+    <div id="edit-form" class="modal hidden">
+        <form id="edit-flashcard-form">
+            <label for="edit-question">Edit Question:</label>
+            <textarea id="edit-question" name="question" required></textarea>
+            <label for="edit-answer">Edit Answer:</label>
+            <textarea id="edit-answer" name="answer" required></textarea>
+            <button type="submit">Save Changes</button>
+        </form>
+        <button type="button" onclick="hideEditForm()">Cancel</button>
+    </div>
+</body>
+</html>

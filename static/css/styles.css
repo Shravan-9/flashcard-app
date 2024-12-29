@@ -1,0 +1,247 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow flashcards to wrap to the next row */
+    gap: 20px; /* Add spacing between flashcards */
+    max-width: calc(100% - 300px); /* Prevent overlapping with the Actions panel */
+    margin-right: 300px; /* Leave space for the Actions panel */
+}
+
+.card {
+    width: 250px;
+    height: 350px;
+    background-color: #ffffff;
+    border: 2px solid #d1d1d1;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    position: relative;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+.card-front {
+    background-color: #ffd700;
+    color: #333;
+}
+
+.card-back {
+    background-color: #ff6347;
+    color: #fff;
+    transform: rotateY(180deg);
+}
+
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.action-panel {
+    width: 250px;
+    height: 100vh; /* Full height */
+    background-color: #f4f4f4;
+    border-left: 1px solid #ccc;
+    position: fixed; /* Keep the panel fixed on the right */
+    right: 0;
+    top: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.action-panel h2 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.action-panel button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background-color: #4caf50;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.action-panel button:hover {
+    background-color: #45a049;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+}
+
+
+
+
+.modal label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.modal textarea {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.modal button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* Ensure buttons stack vertically */
+    width: 100%; /* Buttons stretch across the form for consistency */
+    margin-bottom: 10px; /* Add vertical space between buttons */
+}
+
+.modal button[type="submit"] {
+    background-color: #007bff; /* Blue button */
+}
+
+.modal button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.modal button[type="button"] {
+    background-color: #6c757d; /* Grey button */
+}
+
+.modal button[type="button"]:hover {
+    background-color: #5a6268; /* Darker grey on hover */
+}
+
+.action-panel button.delete-btn{
+    background-color: #dc3545; /* Red button */
+    color: white;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.action-panel button.delete-btn:hover {
+    background-color: #b02a37; /* Darker red on hover */
+}
+
+.card.highlight {
+    animation: glow 1s infinite; /* Glowing animation */
+    box-shadow: 0 0 15px 5px red; /* Glowing effect */
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px 2px red;
+    }
+    50% {
+        box-shadow: 0 0 15px 5px red;
+    }
+    100% {
+        box-shadow: 0 0 5px 2px red;
+    }
+}
+
+.card {
+    position: relative;
+    z-index: 110; /* Place cards above the dimmed background */
+    background-color: yellow; /* Ensure cards stay bright yellow */
+}
+
+#dimmed-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(119, 81, 81, 0.5);
+    z-index: 100; /* Ensure it is behind the cards */
+}
+
+.action-panel button.edit-btn {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.action-panel button.edit-btn:hover {
+    background-color: #0056b3;
+}
